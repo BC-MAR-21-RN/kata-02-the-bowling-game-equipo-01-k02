@@ -4,20 +4,21 @@ class ContadorDePuntaje {
     constructor() {
         this.rounds = 10;
         this.opor = 2;
-        this.tiro = new Tiro();
+        this.scoreFinal = 0;
     }
 
 
-    turno() {
-        this.tiro.tirar()
+    turno(turno) {
+        let scoreEnTurno = Tiro.tirar(turno)
+        console.log('En round ' + turno + ' : ' + scoreEnTurno + ' puntos');
+        this.scoreFinal += scoreEnTurno
     }
 
     startGame() {
-        let ronda = this.round;
-        for (let i = 0; i < this.rounds; i++) {
-            this.turno()
+        for (let ronda = 0; ronda < this.rounds; ronda++) {
+            this.turno(ronda)
+            console.log(this.scoreFinal);
         }
-        ronda++
     }
 
 }
