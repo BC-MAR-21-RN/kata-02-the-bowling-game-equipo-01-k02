@@ -1,8 +1,18 @@
 const { expect } = require("@jest/globals")
 const Tiro = require('../src/tiro')
 
-let random = Math.floor(Math.round() * 11)
-test('Retornar numero aleatorio 1-10', () => {
-    expect(Tiro.tirar(random)).toBeGreaterThanOrEqual(0)
-    expect(Tiro.tirar(random)).toBeLessThanOrEqual(10)
+const testRonda = {
+    ronda: expect.any(Number),
+    tiros: expect.any(Number),
+    pinsRestantes: {
+        tiro1: expect.any(Number),
+        tiro2: expect.any(Number)
+    },
+    isStrike: expect.any(Boolean),
+    isSpare: expect.any(Boolean),
+    puntajeFinal: expect.any(Number)
+}
+
+test('Retornar datos del tiro como objeto', () => {
+    expect(Tiro.tirar(0)).toMatchObject(testRonda)
 })

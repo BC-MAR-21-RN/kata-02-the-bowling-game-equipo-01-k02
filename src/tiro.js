@@ -1,24 +1,34 @@
 class Tiro {
-    /*  Controlador de tiros (2 tiros, tirar los 10 pins en 1 o 2 tiros(strike y spare))
-     *  
-     * Strike: Si se eliminan los 10 pins en el primer tiro, esta ronda sumará los puntos de los 2 siguientes tiros.
-     * Spare: Si se eliminan los 10 pins en los dos tiros, esta ronda sumará los puntos del siguiente tiro.*/
     static tirar(turno) {
-        console.log('*******************');
-        let pins = 10
-        for (let intento = 0; intento <= 1; intento++) {
-            let tiro = Math.floor(Math.random() * (pins >= 10 ? 10 : pins + 1));
-            pins -= tiro;
-            console.log('pins restantes', pins)
-            if (pins == 0 && intento == 0) {
-                console.log('Strike!!')
-                return 10
-            } else if (pins == 0 && intento == 1) {
-                console.log('Spare!!')
-                return 10
+
+        let pins = 10;
+        let tiros = [];
+        let isStrike = false;
+        let isSpare = false;
+        for (var intento = 1; intento <= 2; intento++) {
+            var tiro = Math.floor(Math.random() * (pins >= 10 ? 11 : pins + 1));
+            pins = pins - tiro;
+            if (pins == 0 && intento == 1) {
+                isStrike = true;
+            } else if (isStrike == false && (pins == 0 && intento != 1)) {
+                isSpare = true;
             }
+            tiros.push(pins);
         }
-        return (10 - pins);
+
+
+        return {
+            ronda: turno + 1,
+            tiros: tiros.length,
+            pinsRestantes: {
+                tiro1: tiros[0] == undefined ? 0 : tiros[0],
+                tiro2: tiros[1] == undefined ? 0 : tiros[1]
+            },
+            isStrike: isStrike,
+            isSpare: isSpare,
+            puntajeFinal: (10 - tiros[0]) + (tiros[0] - tiros[1]),
+        };
+
     }
 
 }
