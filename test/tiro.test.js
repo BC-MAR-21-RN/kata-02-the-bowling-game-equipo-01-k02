@@ -1,5 +1,6 @@
 const { expect } = require("@jest/globals")
 const Tiro = require('../src/tiro')
+let tiro = new Tiro()
 
 const testRonda = {
     ronda: expect.any(Number),
@@ -14,5 +15,5 @@ const testRonda = {
 }
 
 test('Retornar datos del tiro como objeto', () => {
-    expect(Tiro.tirar(0)).toMatchObject(testRonda)
+    expect(tiro.tirar(0)).toMatchObject(testRonda)
 })

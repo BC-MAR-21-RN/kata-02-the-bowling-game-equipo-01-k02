@@ -1,5 +1,5 @@
 class Tiro {
-    static tirar(turno) {
+    tirar(turno) {
 
         let pins = 10;
         let tiros = [];

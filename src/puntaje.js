@@ -5,11 +5,11 @@ class ContadorDePuntaje {
         this.rounds = 10;
         this.scoreFinal = 0;
         this.rondas = [];
+        this.tiro = new Tiro()
     }
 
-
     turno(turno) {
-        let scoreEnTurno = Tiro.tirar(turno);
+        let scoreEnTurno = this.tiro.tirar(turno);
         this.rondas.push(scoreEnTurno);
     }
 
