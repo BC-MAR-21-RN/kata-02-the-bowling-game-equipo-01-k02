@@ -23,17 +23,28 @@ class ContadorDePuntaje {
 
     displayScore() {
         let rondas = this.rondas;
+        let finalGame = this.validateRules(rondas)
+
+        console.table(finalGame);
+        console.log("Puntaje Final *************************** " + this.scoreFinal + " ***********************************");
+    }
+
+    validateRules(rondas) {
+        let ronda;
 
         for (let i = 0; i < this.rondas.length; i++) {
             if (rondas[i].isStrike) {
-                rondas[i].puntajeFinal = rondas[i].puntajeFinal + rondas[i + 1].puntajeFinal;
+                ronda = rondas[i + 1] == undefined ? 0 : rondas[i + 1].puntajeFinal;
+
+                rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
             } else if (rondas[i].isSpare) {
-                rondas[i].puntajeFinal = rondas[i].puntajeFinal + (10 - rondas[i + 1].pinsRestantes.tiro1);
+                ronda = rondas[i + 1] == undefined ? 0 : (10 - rondas[i + 1].pinsRestantes.tiro1);
+                rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
             }
             this.scoreFinal += rondas[i].puntajeFinal;
         }
-        console.table(rondas);
-        console.log("Puntaje Final *************************** " + this.scoreFinal + " ***********************************");
+
+        return rondas;
     }
 
 
