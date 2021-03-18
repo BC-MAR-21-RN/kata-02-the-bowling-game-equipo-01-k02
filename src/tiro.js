@@ -20,10 +20,9 @@ class Tiro {
                 break;
             } else if (isStrike == false && (pins == 0 && intento != 1)) {
                 isSpare = true;
-                tiros.push(pins)
-            } else {
-                tiros.push(pins)
             }
+
+            tiros.push(pins);
         }
 
         const resultado = this.resultado(turno, tiros, isStrike, isSpare);
