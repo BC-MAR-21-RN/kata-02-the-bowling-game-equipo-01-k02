@@ -1,6 +1,9 @@
 const { expect } = require("@jest/globals")
-const Tiro = require('../src/tiro')
-let tiro = new Tiro()
+const ContadorDePuntaje = require('../src/puntaje')
+let puntaje = new ContadorDePuntaje();
+puntaje.createGame();
+
+let rondas = puntaje.rondas;
 
 const testRonda = {
     ronda: expect.any(Number),
@@ -14,11 +17,10 @@ const testRonda = {
     puntajeFinal: expect.any(Number)
 }
 
-test('Retornar datos del tiro como objeto', () => {
-    expect(tiro.tirar(0)).toMatchObject(testRonda)
-})
-
-test('Retornar numero entre 0 y 10 ', () => {
-    expect(tiro.realizarTiro(10)).toBeGreaterThanOrEqual(0);
-    expect(tiro.realizarTiro(10)).toBeLessThanOrEqual(10)
+test('retornar rondas', () => {
+    expect(puntaje.validateRules(rondas)).toEqual(
+        expect.arrayContaining([
+            testRonda
+        ])
+    )
 })

@@ -36,7 +36,7 @@ class Tiro {
             tiros: tiros.length,
             pinsRestantes: {
                 tiro1: tiros[0] == undefined ? null : tiros[0],
-                tiro2: tiros[1] == undefined ? null : tiros[1]
+                tiro2: tiros[1] == undefined ? null : tiros[1],
             },
             isStrike: isStrike,
             isSpare: isSpare,
