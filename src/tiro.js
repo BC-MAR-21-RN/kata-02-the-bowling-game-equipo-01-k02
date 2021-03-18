@@ -14,12 +14,14 @@ class Tiro {
             let tiro = this.realizarTiro(pins);
             pins = pins - tiro;
 
-            if (pins == 0 && intento == 1) {
-                isStrike = true;
-                tiros.push(pins);
-                break;
-            } else if (isStrike == false && (pins == 0 && intento != 1)) {
-                isSpare = true;
+            if (pins == 0) {
+                if (intento == 1) {
+                    isStrike = true;
+                    tiros.push(pins);
+                    break;
+                } else {
+                    isSpare = true;
+                }
             }
 
             tiros.push(pins);
