@@ -1,6 +1,4 @@
 class Tiro {
-
-
     realizarTiro(pins) {
         return Math.floor(Math.random() * (pins >= 10 ? 11 : pins + 1))
     }
@@ -12,6 +10,7 @@ class Tiro {
         let isSpare = false;
 
         for (var intento = 1; intento <= 2; intento++) {
+
             let tiro = this.realizarTiro(pins);
             pins = pins - tiro;
 
@@ -27,8 +26,12 @@ class Tiro {
             }
         }
 
+        const resultado = this.resultado(turno, tiros, isStrike, isSpare);
+        return resultado;
+    }
 
-        return {
+    resultado(turno, tiros, isStrike, isSpare) {
+        const result = {
             ronda: turno + 1,
             tiros: tiros.length,
             pinsRestantes: {
@@ -41,6 +44,7 @@ class Tiro {
                 10 - tiros[1] : 10 - tiros[0]
         };
 
+        return result
     }
 
 }

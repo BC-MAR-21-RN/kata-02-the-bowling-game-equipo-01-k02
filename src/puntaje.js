@@ -24,6 +24,13 @@ class ContadorDePuntaje {
     displayScore() {
         let rondas = this.rondas;
         let finalGame = this.validateRules(rondas)
+        let result = 0;
+
+        for (const item of finalGame) {
+            result = result + item.puntajeFinal
+        }
+
+        this.scoreFinal = result;
 
         console.table(finalGame);
         console.log("Puntaje Final *************************** " + this.scoreFinal + " ***********************************");
@@ -31,18 +38,28 @@ class ContadorDePuntaje {
 
     validateRules(rondas) {
         let ronda;
+        let tiroExtra;
 
-        for (let i = 0; i < this.rondas.length; i++) {
+        for (let i = 0; i < rondas.length; i++) {
             if (rondas[i].isStrike) {
+                // if (i == 9) {
+                //     tiroExtra = this.tiro.tirar();
+                //     console.log(tiroExtra)
+                // }
                 ronda = rondas[i + 1] == undefined ? 0 : rondas[i + 1].puntajeFinal;
-
                 rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
             } else if (rondas[i].isSpare) {
+                // if (i == 9) {
+                //     tiroExtra = this.tiro.realizarTiro(10);
+                //     rondas[i].pinsRestantes.tiro3 = (10 - tiroExtra);
+                // }
                 ronda = rondas[i + 1] == undefined ? 0 : (10 - rondas[i + 1].pinsRestantes.tiro1);
                 rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
             }
-            this.scoreFinal += rondas[i].puntajeFinal;
+            // ronda = rondas[i + 1] == undefined ? 0 : (10 - rondas[i + 1].pinsRestantes.tiro1);
+            // rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
         }
+
 
         return rondas;
     }

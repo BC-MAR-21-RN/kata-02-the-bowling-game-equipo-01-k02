@@ -17,3 +17,8 @@ const testRonda = {
 test('Retornar datos del tiro como objeto', () => {
     expect(tiro.tirar(0)).toMatchObject(testRonda)
 })
+
+test('Retornar numero entre 0 y 10 ', () => {
+    expect(tiro.realizarTiro(10)).toBeGreaterThanOrEqual(0);
+    expect(tiro.realizarTiro(10)).toBeLessThanOrEqual(10)
+})
