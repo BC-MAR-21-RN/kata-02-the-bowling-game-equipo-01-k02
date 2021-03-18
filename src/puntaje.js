@@ -41,33 +41,50 @@ class ContadorDePuntaje {
     }
 
     validateRules(rondas) {
-        let ronda;
-        let tiroExtra;
+        let arrayFinal = rondas;
 
-        for (let i = 0; i < rondas.length; i++) {
-            if (rondas[i].isStrike) {
-                if (i == 9) {
-                    tiroExtra = this.tiro.tirar();
-                    rondas[i].pinsRestantes.tiro2 = tiroExtra.pinsRestantes.tiro1;
-                    rondas[i].pinsRestantes['tiro3'] = tiroExtra.pinsRestantes.tiro2;
-                    rondas[i].puntajeFinal = rondas[i].puntajeFinal + (10 - rondas[i].pinsRestantes.tiro3);
-                    this.tiroExtraData = 'Tiros de última ronda: ' + JSON.stringify(rondas[i].pinsRestantes);
-                }
-                ronda = rondas[i + 1] == undefined ? 0 : rondas[i + 1].puntajeFinal;
-                rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
-            } else if (rondas[i].isSpare) {
-                if (i == 9) {
-                    tiroExtra = this.tiro.realizarTiro(10);
-                    rondas[i].pinsRestantes['tiro3'] = (10 - tiroExtra);
-                    rondas[i].puntajeFinal = rondas[i].puntajeFinal + rondas[i].pinsRestantes.tiro3;
-                    this.tiroExtraData = 'Tiros de última ronda: ' + JSON.stringify(rondas[i].pinsRestantes);
-                }
-                ronda = rondas[i + 1] == undefined ? 0 : (10 - rondas[i + 1].pinsRestantes.tiro1);
-                rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
+        for (let i = 0; i < arrayFinal.length; i++) {
+            if (arrayFinal[i].isStrike) {
+                arrayFinal = this.strikeRule(arrayFinal, i)
+            } else if (arrayFinal[i].isSpare) {
+                arrayFinal = this.spareRule(arrayFinal, i)
             }
         }
 
-        return rondas;
+        return arrayFinal;
+    }
+
+    strikeRule(rondas, i) {
+        let ronda;
+        let tiroExtra;
+
+        if (i == 9) {
+            tiroExtra = this.tiro.tirar();
+            rondas[i].pinsRestantes.tiro2 = tiroExtra.pinsRestantes.tiro1;
+            rondas[i].pinsRestantes['tiro3'] = tiroExtra.pinsRestantes.tiro2;
+            rondas[i].puntajeFinal = rondas[i].puntajeFinal + (10 - rondas[i].pinsRestantes.tiro3);
+            this.tiroExtraData = 'Tiros de última ronda: ' + JSON.stringify(rondas[i].pinsRestantes);
+        }
+        ronda = rondas[i + 1] == undefined ? 0 : rondas[i + 1].puntajeFinal;
+        rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
+
+        return rondas
+    }
+
+    spareRule(rondas, i) {
+        let ronda;
+        let tiroExtra;
+
+        if (i == 9) {
+            tiroExtra = this.tiro.realizarTiro(10);
+            rondas[i].pinsRestantes['tiro3'] = (10 - tiroExtra);
+            rondas[i].puntajeFinal = rondas[i].puntajeFinal + rondas[i].pinsRestantes.tiro3;
+            this.tiroExtraData = 'Tiros de última ronda: ' + JSON.stringify(rondas[i].pinsRestantes);
+        }
+        ronda = rondas[i + 1] == undefined ? 0 : (10 - rondas[i + 1].pinsRestantes.tiro1);
+        rondas[i].puntajeFinal = rondas[i].puntajeFinal + ronda;
+
+        return rondas
     }
 
 

@@ -21,7 +21,6 @@ class Tiro {
                     isSpare = true;
                 }
             }
-
             tiros.push(pins);
         }
 
