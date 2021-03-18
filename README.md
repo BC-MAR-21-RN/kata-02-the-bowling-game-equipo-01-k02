@@ -53,3 +53,5 @@
 - [Getting Started With Jest](https://www.valentinog.com/blog/jest/) 
 - [Testing JavaScript with Jest](https://flaviocopes.com/jest/)
 
+# Calificación Code Climate
+![cover](img/Calificación.PNG)
