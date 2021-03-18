@@ -10,10 +10,8 @@ class Tiro {
         let isSpare = false;
 
         for (var intento = 1; intento <= 2; intento++) {
-
             let tiro = this.realizarTiro(pins);
             pins = pins - tiro;
-
             if (pins == 0) {
                 if (intento == 1) {
                     isStrike = true;
@@ -27,8 +25,7 @@ class Tiro {
             tiros.push(pins);
         }
 
-        const resultado = this.resultado(turno, tiros, isStrike, isSpare);
-        return resultado;
+        return this.resultado(turno, tiros, isStrike, isSpare);
     }
 
     resultado(turno, tiros, isStrike, isSpare) {
